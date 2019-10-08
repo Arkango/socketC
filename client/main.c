@@ -33,18 +33,36 @@ int main(int argc, char const *argv[])
         printf("\nConnection Failed \n");
         return -1;
     }
-    send(sock , hello , strlen(hello) , 0 );
+
+    //connessione ricevuta
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
 
-    send(sock , hello , strlen(hello) , 0 );
+    memset(buffer,0, sizeof(buffer));
+
+    //prima stringa
+    char *tmp;
+    printf("Insert string\n");
+    scanf("%s",tmp);
+
+    send(sock , tmp , strlen(tmp) , 0 );
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
 
+    memset(buffer,0, sizeof(buffer));
+    memset(tmp,0, sizeof(tmp));
 
-    send(sock , hello , strlen(hello) , 0 );
+    //seconda stringa
+
+    printf("Insert string\n");
+    scanf("%s",tmp);
+
+    send(sock , tmp , strlen(tmp) , 0 );
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
+
+    memset(buffer,0, sizeof(buffer));
+    memset(tmp,0, sizeof(tmp));
 
 
 

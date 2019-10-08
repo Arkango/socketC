@@ -74,6 +74,8 @@ int main(int argc, char const *argv[])
 
                     send(new_socket , tmp , strlen(tmp) , 0 );
 
+                    memset(buffer,0, sizeof(buffer));
+                    memset(tmp,0, sizeof(tmp));
 
 
 
@@ -90,6 +92,9 @@ int main(int argc, char const *argv[])
 
                     printf("%s\n",tmp);
                     send(new_socket , tmp , strlen(tmp) , 0 );
+
+                    memset(buffer,0, sizeof(buffer));
+                    memset(tmp,0, sizeof(tmp));
 
                     break;
                 default:
