@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#define PORT 8080
+#define PORT 1234
 
 int main(int argc, char const *argv[])
 {
@@ -34,8 +34,19 @@ int main(int argc, char const *argv[])
         return -1;
     }
     send(sock , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
+
+    send(sock , hello , strlen(hello) , 0 );
+    valread = read( sock , buffer, 1024);
+    printf("%s\n",buffer );
+
+
+    send(sock , hello , strlen(hello) , 0 );
+    valread = read( sock , buffer, 1024);
+    printf("%s\n",buffer );
+
+
+
     return 0;
 }
