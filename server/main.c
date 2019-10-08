@@ -24,12 +24,13 @@ int main(int argc, char const *argv[])
     }
 
     // Forcefully attaching socket to the port 8080
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
+    /*if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
                    &opt, sizeof(opt)))
     {
         perror("setsockopt");
         exit(EXIT_FAILURE);
-    }
+    }*/
+
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons( PORT );
@@ -98,7 +99,10 @@ int main(int argc, char const *argv[])
 
                     break;
                 default:
-                    exit(0);
+                    valread = read( new_socket , buffer, 1024);
+                    if(valread > 0)
+                        printf("Client: %s\n",buffer );
+                    //exit(0);
                     break;
             }
             times += 1;
