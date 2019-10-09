@@ -64,6 +64,8 @@ int main(int argc, char const *argv[])
     memset(buffer,0, sizeof(buffer));
     memset(tmp,0, sizeof(tmp));
 
+    close(sock);
+
 
 
     return 0;

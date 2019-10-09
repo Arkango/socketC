@@ -67,6 +67,7 @@ int main(int argc, char const *argv[])
 
                     char *tmp;
 
+
                     for(i=0; i < sizeof(buffer); i++){
                         memset(tmp + i, toupper(buffer[i]), sizeof(char));
                     }
@@ -99,10 +100,13 @@ int main(int argc, char const *argv[])
 
                     break;
                 default:
-                    valread = read( new_socket , buffer, 1024);
-                    if(valread > 0)
-                        printf("Client: %s\n",buffer );
-                    //exit(0);
+                    if ((new_socket = accept(server_fd, (struct sockaddr *)&address,
+                                             (socklen_t*)&addrlen))<0)
+                    {
+                        perror("accept");
+                        exit(EXIT_FAILURE);
+                    }
+                    times = -1;
                     break;
             }
             times += 1;
