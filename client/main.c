@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
     //prima stringa
     char *tmp;
     printf("Insert string\n");
-    scanf("%s",tmp);
+    fgets(tmp,1024,stdin);
 
     send(sock , tmp , strlen(tmp) , 0 );
     valread = read( sock , buffer, 1024);
@@ -55,7 +55,7 @@ int main(int argc, char const *argv[])
     //seconda stringa
 
     printf("Insert string\n");
-    scanf("%s",tmp);
+    fgets(tmp,1024,stdin);
 
     send(sock , tmp , strlen(tmp) , 0 );
     valread = read( sock , buffer, 1024);
