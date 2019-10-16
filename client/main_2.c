@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 
 
     if(argc == 3){
-        PORT = (int) argv[2];
+        sscanf (argv[2],"%d",&PORT);
     }
 
 
@@ -47,11 +47,7 @@ int main(int argc, char const *argv[])
 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
-
-
     addr_list = (struct in_addr **)lh->h_addr_list;
-
-
     serv_addr.sin_addr = *addr_list[0];
 
 
