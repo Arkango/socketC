@@ -1,0 +1,3 @@
+/home/strunz/CLionProjects/socketC/client/CMakeFiles/rebuild_cache.dir
+/home/strunz/CLionProjects/socketC/client/CMakeFiles/client.dir
+/home/strunz/CLionProjects/socketC/client/CMakeFiles/edit_cache.dir

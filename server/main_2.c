@@ -9,7 +9,7 @@
 #include <netdb.h>
 
 
-#define PORT 1234
+#define PORT 1235
 int main(int argc, char const *argv[])
 {
     int server_fd, new_socket, valread;
@@ -19,6 +19,9 @@ int main(int argc, char const *argv[])
     char buffer[1024] = {0};
     char *hello = "connessione avvenuta";
     struct hostent *host;
+    char* canonical_name;
+
+
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -26,7 +29,6 @@ int main(int argc, char const *argv[])
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
-
 
 
     address.sin_family = AF_INET;
@@ -54,10 +56,9 @@ int main(int argc, char const *argv[])
         perror("accept");
         exit(EXIT_FAILURE);
     } else{
-        host = gethostbyaddr((char *) &address, 4, AF_INET);
-        char* canonical_name = host->h_name;
-        printf("Risultato di gethostbyaddr(%s): %s\n",
-               inet_aton(address.sin_addr.s_addr), canonical_name);
+        host = gethostbyaddr((char *)&address.sin_addr.s_addr, 4, AF_INET);
+        printf("Risultato di gethostbyaddr(&s): %s\n",inet_ntoa(address.sin_addr.s_addr),host->h_name);
+
 
     }
 
@@ -110,6 +111,9 @@ int main(int argc, char const *argv[])
                     {
                         perror("accept");
                         exit(EXIT_FAILURE);
+                    }else{
+                        host = gethostbyaddr((char *)&address.sin_addr.s_addr, 4, AF_INET);
+                        printf("Risultato di gethostbyaddr(&s): %s\n",inet_ntoa(address.sin_addr.s_addr),host->h_name);
                     }
                     times = -1;
                     break;
