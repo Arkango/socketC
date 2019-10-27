@@ -6,7 +6,11 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <ctype.h>
+#include <arpa/inet.h>
 #define PORT 1234
+
+
+
 int main(int argc, char const *argv[])
 {
     int server_fd, new_socket, valread;
@@ -23,16 +27,8 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE);
     }
 
-    // Forcefully attaching socket to the port 8080
-    /*if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                   &opt, sizeof(opt)))
-    {
-        perror("setsockopt");
-        exit(EXIT_FAILURE);
-    }*/
-
     address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_addr.s_addr = inet_addr("127.0.0.1");
     address.sin_port = htons( PORT );
 
     // Forcefully attaching socket to the port 8080
@@ -47,58 +43,108 @@ int main(int argc, char const *argv[])
         perror("listen");
         exit(EXIT_FAILURE);
     }
-    int i,times = 0;
+    int i,times = -1;
 
-    if ((new_socket = accept(server_fd, (struct sockaddr *)&address,
-                             (socklen_t*)&addrlen))<0)
-    {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }
+
 
     while(1){
+
+
+
             switch (times){
                 case 0:
                     send(new_socket , hello , strlen(hello) , 0 );
+                    times = 1;
                     break;
                 case 1:
+
+                    //funzione programma
                     valread = read( new_socket , buffer, 1024);
-                    printf("Client: %s\n",buffer );
-
-                    char *tmp;
+                    char tmp[100];
 
 
-                    for(i=0; i < sizeof(buffer); i++){
-                        memset(tmp + i, toupper(buffer[i]), sizeof(char));
-                    }
-
-                    printf("%s\n",tmp);
-
-                    send(new_socket , tmp , strlen(tmp) , 0 );
-
-                    memset(buffer,0, sizeof(buffer));
-                    memset(tmp,0, sizeof(tmp));
+                    char demil[] = "-";
+                    char* token = strtok(buffer, demil);
+                    char *array[3];
+                    int i = 0;
 
 
-
-                    break;
-                case 2:
-                    valread = read( new_socket , buffer, 1024);
-                    printf("Client:  %s\n",buffer );
-
-
-                    for(i=0; i < sizeof(buffer); i++){
-                        memset(tmp + i, tolower(buffer[i]), sizeof(char));
+                    while(token != NULL)
+                    {
+                        array[i++] = token;
+                        token = strtok(NULL, demil);
 
                     }
 
-                    printf("%s\n",tmp);
-                    send(new_socket , tmp , strlen(tmp) , 0 );
+                    if(i != 3){
+                        times = -1;
+                        break;
+                    }
+
+                   int flag = 0;
+                   int op = 0;
+                   int first;
+                   sscanf(array[1], "%d", &first);
+                   int second;
+                   sscanf(array[2], "%d", &second);
+
+
+                   if(strcmp(array[0],"a") == 0 || strcmp(array[0],"A") == 0 ){
+                        op = first+second;
+                        sprintf(tmp,"risultato addizione %d",op );
+                        send(new_socket , tmp , strlen(tmp) , 0 );
+                        flag = 1;
+                   }
+
+
+                   if(strcmp(array[0],"s") == 0 || strcmp(array[0],"S") == 0 ){
+                        op = first-second;
+                       sprintf(tmp,"risultato sottrazione %d",op );
+                        send(new_socket , tmp , strlen(tmp) , 0 );
+                        flag = 1;
+                   }
+
+
+
+                    if(strcmp(array[0],"m") == 0 || strcmp(array[0],"M") == 0 ){
+                         op = first*second;
+                        sprintf(tmp,"risultato moltiplicazion %d",op );
+                         send(new_socket , tmp , strlen(tmp) , 0 );
+                         flag = 1;
+
+                    }
+
+
+
+                    if(strcmp(array[0],"d") == 0 || strcmp(array[0],"D") == 0 ){
+                        if(second == 0){
+                          op = -1;
+                        }else{
+                         op = first+second;
+
+                        }
+                        sprintf(tmp,"risultato divisione %d",op );
+                         send(new_socket , tmp , strlen(tmp) , 0 );
+                         flag = 1;
+
+                    }
+
+
+                     if(flag == 0){
+                         strcpy(tmp, "TERMINE PROCESSO CLIENT");
+
+                         send(new_socket , tmp , strlen(tmp) , 0 );
+                         close(new_socket);
+                         times = -1;
+                     }
 
                     memset(buffer,0, sizeof(buffer));
                     memset(tmp,0, sizeof(tmp));
+                    memset(array,0, sizeof(array));
+
 
                     break;
+
                 default:
                     if ((new_socket = accept(server_fd, (struct sockaddr *)&address,
                                              (socklen_t*)&addrlen))<0)
@@ -106,13 +152,14 @@ int main(int argc, char const *argv[])
                         perror("accept");
                         exit(EXIT_FAILURE);
                     }
-                    times = -1;
+                    times = 0;
                     break;
             }
-            times += 1;
 
 
     }
+}
 
-    return 0;
-} 
+
+
+

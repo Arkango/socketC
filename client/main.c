@@ -34,39 +34,31 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    //connessione ricevuta
+    //stringa benvenuto
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
-
     memset(buffer,0, sizeof(buffer));
 
-    //prima stringa
+
+
     char *tmp;
-    printf("Insert string\n");
+    printf("Insert operation: \nformat: operand-op1-op2\na-A addizione\ts-S sottrazione\nm-M moltiplicazione\td-D divisione\n\n");
     fgets(tmp,1024,stdin);
 
     send(sock , tmp , strlen(tmp) , 0 );
     valread = read( sock , buffer, 1024);
+    if(strcmp(buffer,"TERMINE PROCESSO CLIENT")==0){
+        printf("chiusura connessione\n");
+        close(sock);
+        return 1;
+    }
     printf("%s\n",buffer );
-
-    memset(buffer,0, sizeof(buffer));
     memset(tmp,0, sizeof(tmp));
-
-    //seconda stringa
-
-    printf("Insert string\n");
-    fgets(tmp,1024,stdin);
-
-    send(sock , tmp , strlen(tmp) , 0 );
-    valread = read( sock , buffer, 1024);
-    printf("%s\n",buffer );
-
     memset(buffer,0, sizeof(buffer));
-    memset(tmp,0, sizeof(tmp));
 
+
+
+    printf("chiusura connessione\n");
     close(sock);
-
-
-
     return 0;
 }
