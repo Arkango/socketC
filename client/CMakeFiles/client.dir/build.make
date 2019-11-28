@@ -57,27 +57,27 @@ include CMakeFiles/client.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/client.dir/flags.make
 
-CMakeFiles/client.dir/main.c.o: CMakeFiles/client.dir/flags.make
-CMakeFiles/client.dir/main.c.o: main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/strunz/CLionProjects/socketC/client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/client.dir/main.c.o   -c /home/strunz/CLionProjects/socketC/client/main.c
+CMakeFiles/client.dir/main_udp.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/main_udp.c.o: main_udp.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/strunz/CLionProjects/socketC/client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/main_udp.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/client.dir/main_udp.c.o   -c /home/strunz/CLionProjects/socketC/client/main_udp.c
 
-CMakeFiles/client.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/strunz/CLionProjects/socketC/client/main.c > CMakeFiles/client.dir/main.c.i
+CMakeFiles/client.dir/main_udp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/main_udp.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/strunz/CLionProjects/socketC/client/main_udp.c > CMakeFiles/client.dir/main_udp.c.i
 
-CMakeFiles/client.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/strunz/CLionProjects/socketC/client/main.c -o CMakeFiles/client.dir/main.c.s
+CMakeFiles/client.dir/main_udp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/main_udp.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/strunz/CLionProjects/socketC/client/main_udp.c -o CMakeFiles/client.dir/main_udp.c.s
 
 # Object files for target client
 client_OBJECTS = \
-"CMakeFiles/client.dir/main.c.o"
+"CMakeFiles/client.dir/main_udp.c.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
 
-client: CMakeFiles/client.dir/main.c.o
+client: CMakeFiles/client.dir/main_udp.c.o
 client: CMakeFiles/client.dir/build.make
 client: CMakeFiles/client.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/strunz/CLionProjects/socketC/client/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable client"

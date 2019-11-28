@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
 
 
     char *tmp;
-    printf("Insert operation: \nformat: operand-op1-op2\na-A addizione\ts-S sottrazione\nm-M moltiplicazione\td-D divisione\n\n");
+    printf("Insert operation: \nformat: operand|op1|op2\na-A addizione\ts-S sottrazione\nm-M moltiplicazione\td-D divisione\n\n");
     fgets(tmp,1024,stdin);
 
     send(sock , tmp , strlen(tmp) , 0 );

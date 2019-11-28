@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
                     char tmp[100];
 
 
-                    char demil[] = "-";
+                    char demil[] = "|";
                     char* token = strtok(buffer, demil);
                     char *array[3];
                     int i = 0;
@@ -82,16 +82,16 @@ int main(int argc, char const *argv[])
                     }
 
                    int flag = 0;
-                   int op = 0;
-                   int first;
-                   sscanf(array[1], "%d", &first);
-                   int second;
-                   sscanf(array[2], "%d", &second);
+                    float op = 0.0;
+                   float first;
+                   sscanf(array[1], "%f", &first);
+                    float second;
+                   sscanf(array[2], "%f", &second);
 
 
                    if(strcmp(array[0],"a") == 0 || strcmp(array[0],"A") == 0 ){
                         op = first+second;
-                        sprintf(tmp,"risultato addizione %d",op );
+                        sprintf(tmp,"risultato addizione %f",op );
                         send(new_socket , tmp , strlen(tmp) , 0 );
                         flag = 1;
                    }
@@ -99,7 +99,7 @@ int main(int argc, char const *argv[])
 
                    if(strcmp(array[0],"s") == 0 || strcmp(array[0],"S") == 0 ){
                         op = first-second;
-                       sprintf(tmp,"risultato sottrazione %d",op );
+                       sprintf(tmp,"risultato sottrazione %f",op );
                         send(new_socket , tmp , strlen(tmp) , 0 );
                         flag = 1;
                    }
@@ -108,7 +108,7 @@ int main(int argc, char const *argv[])
 
                     if(strcmp(array[0],"m") == 0 || strcmp(array[0],"M") == 0 ){
                          op = first*second;
-                        sprintf(tmp,"risultato moltiplicazion %d",op );
+                        sprintf(tmp,"risultato moltiplicazion %f",op );
                          send(new_socket , tmp , strlen(tmp) , 0 );
                          flag = 1;
 
@@ -120,10 +120,10 @@ int main(int argc, char const *argv[])
                         if(second == 0){
                           op = -1;
                         }else{
-                         op = first+second;
+                         op = first/second;
 
                         }
-                        sprintf(tmp,"risultato divisione %d",op );
+                        sprintf(tmp,"risultato divisione %f",op );
                          send(new_socket , tmp , strlen(tmp) , 0 );
                          flag = 1;
 
@@ -141,6 +141,8 @@ int main(int argc, char const *argv[])
                     memset(buffer,0, sizeof(buffer));
                     memset(tmp,0, sizeof(tmp));
                     memset(array,0, sizeof(array));
+
+                    times = -1;
 
 
                     break;

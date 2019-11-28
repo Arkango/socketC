@@ -1,1 +1,1 @@
-/usr/bin/cc   -rdynamic CMakeFiles/client.dir/main.c.o  -o client 
+/usr/bin/cc -g  -rdynamic CMakeFiles/client.dir/main_udp.c.o  -o client 

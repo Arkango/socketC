@@ -123,32 +123,32 @@ client/fast:
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
-main.o: main.c.o
+main_udp.o: main_udp.c.o
 
-.PHONY : main.o
+.PHONY : main_udp.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main.c.o
-.PHONY : main.c.o
+main_udp.c.o:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main_udp.c.o
+.PHONY : main_udp.c.o
 
-main.i: main.c.i
+main_udp.i: main_udp.c.i
 
-.PHONY : main.i
+.PHONY : main_udp.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main.c.i
-.PHONY : main.c.i
+main_udp.c.i:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main_udp.c.i
+.PHONY : main_udp.c.i
 
-main.s: main.c.s
+main_udp.s: main_udp.c.s
 
-.PHONY : main.s
+.PHONY : main_udp.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main.c.s
-.PHONY : main.c.s
+main_udp.c.s:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main_udp.c.s
+.PHONY : main_udp.c.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... client"
 	@echo "... edit_cache"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... main_udp.o"
+	@echo "... main_udp.i"
+	@echo "... main_udp.s"
 .PHONY : help
 
 
