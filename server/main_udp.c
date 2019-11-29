@@ -12,6 +12,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <ctype.h>
+#include <netdb.h>
 
 #define ECHOMAX 512
 #define PORT 2020
@@ -24,7 +25,8 @@ int main(int argc, char const *argv[]) {
     char echoBuffer[ECHOMAX];
     int recvMsgSize;
     char c;
-
+    struct hostent* client;
+    struct in_addr ip;
 
 // CREAZIONE DELLA SOCKET
     if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
@@ -65,13 +67,19 @@ int main(int argc, char const *argv[]) {
 
         //printf("Messaggio ricevuto %s client %s\n", echoBuffer, inet_ntoa(echoClntAddr.sin_addr));
 
+        inet_aton(inet_ntoa(echoClntAddr.sin_addr),&ip);
 
+        if ((client = gethostbyaddr((const void *)&ip, sizeof ip, AF_INET)) == NULL) {
+            fprintf(stderr, "no reverse name associated with %s\n", argv[1]);
+            return 1;
+        }
 
 
         if(recvMsgSize > 0){
             switch (i) {
                 case 0:
-                    printf("Messaggio ricevuto %s client %s\n", echoBuffer, inet_ntoa(echoClntAddr.sin_addr));
+                    printf("Messaggio ricevuto %s client %s\n", echoBuffer,client->h_name);
+
                     if (sendto(sock, "OK", 2, 0, (struct sockaddr *)&echoClntAddr,sizeof(echoClntAddr)) != 2){
                         printf("Errore nel numero di byte inviati");
                         return(-1);
